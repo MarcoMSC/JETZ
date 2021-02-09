@@ -7,7 +7,7 @@ pc_name = socket.gethostname()
 print("Server gestartet auf: ", pc_name)
 
 
-s.bind((pc_name, port))
+s.bind(('', port))
 s.listen(1)
 print("Server wartet auf Anfrage...")
 
