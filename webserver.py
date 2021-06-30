@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import requests
 
+
 app = Flask(__name__)
 
 
@@ -13,7 +14,7 @@ def wetter():
     return wetterbericht
 
 def nachricht_auswerten(nachricht):
-    if nachricht is None:
+    if nachricht is None or nachricht == "":
         return " "
     print(":: ", nachricht)
     if nachricht.lower().find("zeit") != -1:
@@ -26,13 +27,24 @@ def nachricht_auswerten(nachricht):
         antwort = 'ich verstehe dies leider nicht...'
     return antwort
 
+def button_auswerten(button):
+    if(button == "AUS"):
+        neuer_zustand = "AN"
+    else:
+        neuer_zustand = "AUS"
+    return neuer_zustand;
 
 @app.route('/', methods=['Get', 'POST'])
 def index():
     befehl = request.form.get("befehl")
     antwort = nachricht_auswerten(befehl)
     print(antwort)
-    return render_template('index.html', antworttext=antwort)
+
+    LED = request.form.get("LED")
+    LED_zustand = button_auswerten(LED)
+    print(LED_zustand)
+
+    return render_template('index.html', antworttext=antwort, led=LED_zustand)
 
 
 if __name__ == '__main__':

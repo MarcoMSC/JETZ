@@ -33,9 +33,26 @@
 h1{
     color: red;
 }
+h3{
+    color: red;
+}
 div{
     margin-top: 20px;
     font-size: 20px;
+}
+.Led{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 20px;
+}
+.AN{
+    background-color: green;
+}
+
+.AUS{
+    background-color: gray;
 }
 </style>
 </head>
@@ -47,6 +64,10 @@ div{
     <form action="/" method="POST">
         <input class="inputtext" type="text" name="befehl"><br><br>
         <input class="button" type="submit" value="Send">
+
+        <h3> LED Steuerung</h3>
+        <button class="Led {{led}}" type="submit" name="LED" value="{{led}}"></button>
+
     </form> 
     <div>{{antworttext}}</div>
 </body>
